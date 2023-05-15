@@ -1,0 +1,1 @@
+cd "C:\Users\TunaH\Desktop\python-lorai" & ..venv\Scripts\activate & pythonw lorai.py

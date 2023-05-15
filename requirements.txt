@@ -1,0 +1,12 @@
+playsound==1.2.2
+pyaudio
+googletrans==3.1.0a0
+numpy
+pandas
+opencv-python
+mouse
+keyboard
+requests
+gtts
+feedparser
+SpeechRecognition
