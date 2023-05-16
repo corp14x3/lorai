@@ -1,1 +1,1 @@
-cd "C:\Users\TunaH\Desktop\python-lorai" & ..venv\Scripts\activate & pythonw lorai.py
+cd "C:\Users\corp1\Desktop\lorai" & pythonw lorai.py
