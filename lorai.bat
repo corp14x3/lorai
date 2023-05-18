@@ -1,1 +1,1 @@
-cd "C:\Users\corp1\Desktop\lorai" & pythonw lorai.py
+cd "C:\Users\corp1\Desktop\lorai" & python lorai.py

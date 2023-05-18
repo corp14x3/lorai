@@ -1,0 +1,18 @@
+{% extends './templatelorai.html' %}
+
+{% block body %}
+<form action="{{url_for('loraiprogram')}}" method="post">
+    <input type="text" name="programname" placeholder="program name">
+    <input type="text" name="programway" placeholder="program path">
+    <button type="submit" class="btn btn-outline-success">Ekle</button>
+    <a class="btn btn-outline-danger" href="./shortcuts-delete" role="button">Kaldır</a>
+</form>
+
+
+
+
+<p>{% for element in liste %}
+       <br> {{ element }}
+   {% endfor %}
+</p>
+{% endblock %}

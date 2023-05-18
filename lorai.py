@@ -1,12 +1,8 @@
 from playsound import playsound
 from gtts import gTTS
-from flask import Flask , request , render_template
 
-import os , webbrowser , datetime , sqlite3 , googletrans
+import os , webbrowser , datetime , sqlite3 , googletrans , subprocess
 import speech_recognition as sr
-
-print("Lorai System Controller")
-
 class Lorai():
     def __init__(self):
         pass
@@ -51,6 +47,10 @@ class Lorai():
                 elif command == 'Bilgisayarı yeniden başlat':
                     os.system("shutdown /r /t 0")
                 
+                elif command == "site":
+                    subprocess.Popen(r"C:\Users\corp1\Desktop\lorai\loraisite.py",shell=True)
+                    webbrowser.open(url="http://localhost:7432/shortcuts")
+
                 elif last[0] == 'çevir':
                     last.remove('çevir')
                     translator = googletrans.Translator()
@@ -62,10 +62,8 @@ class Lorai():
             except:
                 print('Herhangibi bir ses yok.')
            
-
-
-
+lorai=Lorai()
+lorai.speak(text='Merhaba Ben Lora!')
 
 while True:
-    lorai=Lorai()
     lorai.loraimain()
