@@ -10,3 +10,5 @@ requests
 gtts
 feedparser
 SpeechRecognition
+pystray
+pillow
