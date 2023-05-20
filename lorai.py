@@ -47,10 +47,10 @@ class Lorai():
                         webbrowser.open(url=f"https://www.google.com/search?q={search}")
                     last.clear()
 
-                elif command == 'Bilgisayarı kapat':
+                elif command == 'bilgisayarı kapat':
                     os.system("shutdown /s /t 0")
                 
-                elif command == 'Bilgisayarı yeniden başlat':
+                elif command == 'bilgisayarı yeniden başlat':
                     os.system("shutdown /r /t 0")
 
                 elif last[0] == 'aç':
