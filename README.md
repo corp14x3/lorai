@@ -1,5 +1,5 @@
-##Lorai Self Asistant
-#installation
+## Lorai Self Asistant
+# installation
 
 When you in the lorai folder , you just need to run :
 
