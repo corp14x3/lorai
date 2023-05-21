@@ -12,3 +12,4 @@ and start the Lorai with :
 ```sh
 python lorai.py
 ```
+> Note: Please dowload main folder to desktop.
