@@ -1,10 +1,11 @@
 from playsound import playsound
 from gtts import gTTS
-import os , webbrowser , datetime , sqlite3 , googletrans , subprocess , pystray , threading , pyautogui
+import os , webbrowser , datetime , sqlite3 , googletrans , subprocess , pystray , threading , pyautogui , keyboard , time
 import speech_recognition as sr
 from PIL import Image
 from pystray import MenuItem as item
 from tkinter import messagebox
+
 username = os.getlogin()
 con = sqlite3.connect("lorai.db", check_same_thread=False)
 cursor = con.cursor()
@@ -62,7 +63,6 @@ class Lorai():
                                 saga_sola = pyautogui.position()[0]
                                 yukari_asagi = pyautogui.position()[1]
                                 pyautogui.moveTo(x=saga_sola,y=yukari_asagi - int(last[2]))
-                            
                 loraicontrol(self, status=False)
 
                 if command == 'saat kaç':
@@ -98,6 +98,7 @@ class Lorai():
                     answerwrite = translator.translate(text=question,src='tr',dest='en')
                     print(answerwrite.text)
                     lorai.speak_en(text=answerwrite.text)
+
                 if command == 'temizle':
                     delete_folder = ["Temp","Prefetch"]
                     delete_folder2 = (r"C:\Users\{}\AppData\Local\Temp".format(username))
