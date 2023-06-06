@@ -1,0 +1,42 @@
+{% extends './templatelorai.html' %}
+{% block body %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function zamanıGüncelle() {
+        $.ajax({
+            url: "/zaman-al",
+            success: function(cevap) {
+                $('#guncel-zaman').text("Today is " + cevap);
+            }
+        });
+    }
+    zamanıGüncelle();
+    setInterval(zamanıGüncelle, 1000);
+</script>
+    <h1>Welcome to Lor(A)I</h1>
+        <p id="guncel-zaman"></p>
+        <p>
+            Recomended Browsers:
+            <style>
+             .btn.btn-outline-primary {
+               color: orange;
+               border-color: orange;
+             }
+             .btn.btn-outline-primary:hover {
+                 background-color: black;
+             }
+            </style>
+          
+            <br>
+            <br>
+            <a href="https://download.mozilla.org/?product=firefox-stub&os=win&lang=tr"><button type="button" class="btn btn-outline-primary">Firefox</button></a> <a href="https://laptop-updates.brave.com/latest/winx64"><button type="button" class="btn btn-outline-primary">Brave</button></a>
+            <br>
+            <br>
+            Recomended Mods:
+            <br>
+            <br>
+            If you want to take advantage of all the features you need to download:
+            gecko için tuş
+        </p>
+
+{% endblock %}

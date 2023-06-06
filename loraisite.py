@@ -1,6 +1,7 @@
 from flask import Flask , request , render_template , redirect , url_for , flash
 
-import sqlite3 , random
+import sqlite3 , random , datetime , requests as r
+
 con = sqlite3.connect("lorai.db", check_same_thread=False) 
 cursor = con.cursor()
 cursor.execute("CREATE TABLE IF NOT EXISTS programsc (pn TEXT, pw TEXT)")
@@ -13,6 +14,12 @@ app.config['SECRET_KEY'] = str(random.randint(0, 74123))
 @app.route("/",methods=["GET"])
 def lorai():
     return render_template("lorai.html")
+
+@app.route("/zaman-al", methods=["GET"])
+def zaman_al():
+    zaman = datetime.datetime.now()
+    zaman = zaman.strftime("%d,%B,%A ; %H:%M:%S")
+    return zaman
 
 @app.route("/shortcuts",methods=["GET","POST"])
 def loraiprogram():

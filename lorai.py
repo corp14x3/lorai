@@ -5,6 +5,7 @@ import speech_recognition as sr
 from PIL import Image
 from pystray import MenuItem as item
 from tkinter import messagebox
+from selenium import webdriver
 
 username = os.getlogin()
 con = sqlite3.connect("lorai.db", check_same_thread=False)
@@ -64,6 +65,8 @@ class Lorai():
                                 yukari_asagi = pyautogui.position()[1]
                                 pyautogui.moveTo(x=saga_sola,y=yukari_asagi - int(last[2]))
                 loraicontrol(self, status=False)
+
+                
 
                 if command == 'saat kaç':
                     saat = datetime.datetime.now().strftime('%H:%M')
@@ -143,7 +146,7 @@ def on_quit():
     icon.stop()
 def guilorai():
     subprocess.Popen(r"C:\Users\{}\Desktop\lorai\loraisite.py".format(username),shell=True)
-    webbrowser.open(url="http://localhost:7432/shortcuts")
+    webbrowser.open(url="http://localhost:7432/")
 image = Image.open("./static/media/infinity-symbol-clipart-download-best-infinity-14.png")
 menu = (
     item('LorAI', guilorai),

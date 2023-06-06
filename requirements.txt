@@ -7,9 +7,11 @@ opencv-python
 mouse
 keyboard
 requests
+flask
 gtts
 feedparser
 SpeechRecognition
 pystray
 pillow
 pyautogui
+selenium
