@@ -46,5 +46,7 @@ def loraiprogramd():
         return redirect('shortcuts-delete')
     return render_template('loraiscd.html',liste = data)
 
+
+
 if __name__ == '__main__':
     app.run(port=7432)
