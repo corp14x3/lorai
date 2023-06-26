@@ -1,11 +1,12 @@
 from flask import Flask , request , render_template , redirect , url_for , flash
 
-import sqlite3 , random , datetime , requests as r
+import sqlite3 , random, os , datetime , requests as r
 
+username = os.getlogin()
 con = sqlite3.connect("lorai.db", check_same_thread=False) 
 cursor = con.cursor()
 cursor.execute("CREATE TABLE IF NOT EXISTS programsc (pn TEXT, pw TEXT)")
-
+cursor.execute("CREATE TABLE IF NOT EXISTS drpc (header TEXT, details TEXT , pictureheader TEXT , picturelink TEXT , 1header TEXT , 1link TEXT , 2header TEXT , 2link TEXT)")
 
 app = Flask(__name__,template_folder='./pages')
 app.debug = True
@@ -45,6 +46,13 @@ def loraiprogramd():
         flash(message='Kısayol başarıyla kaldırıldı')
         return redirect('shortcuts-delete')
     return render_template('loraiscd.html',liste = data)
+
+@app.route("/discordrpc",methods=["GET","POST"])
+def lorairpc():
+    if request.method == "POST":
+        subprocess.Popen(r"C:\Users\{}\Desktop\lorai\lorairpc.py".format(username),shell=True)
+        return redirect('shortcuts-delete')
+    return render_template('loraidc.html')
 
 
 

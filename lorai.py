@@ -36,38 +36,6 @@ class Lorai():
                 last = command.split(" ")
                 print(command,last)
 
-                def loraicontrol(self,status):
-                    if status == False:
-                        print("lorai control is off")
-                        return
-                    else:
-                        main = str(pyautogui.getInfo()[4])
-                        new = main.split(" ")
-                        new[0] = new[0].replace('Size(width=', '').replace(',', '')
-                        new[1] = new[1].replace('height=', '').replace(')', '')
-                        if last[0] == "pixel":
-                            if last[1] == 'orta':
-                                pyautogui.moveTo(x=int(new[0])/2,y=int(new[1])/2)
-                            if last[1] == 'sağa':
-                                saga_sola = pyautogui.position()[0]
-                                yukari_asagi = pyautogui.position()[1]
-                                pyautogui.moveTo(x=saga_sola + int(last[2]),y=yukari_asagi)
-                            if last[1] == 'sola':
-                                saga_sola = pyautogui.position()[0]
-                                yukari_asagi = pyautogui.position()[1]
-                                pyautogui.moveTo(x=saga_sola - int(last[2]),y=yukari_asagi)
-                            if last[1] == 'yukarı':
-                                saga_sola = pyautogui.position()[0]
-                                yukari_asagi = pyautogui.position()[1]
-                                pyautogui.moveTo(x=saga_sola,y=yukari_asagi + int(last[2]))
-                            if last[1] == 'aşağı': 
-                                saga_sola = pyautogui.position()[0]
-                                yukari_asagi = pyautogui.position()[1]
-                                pyautogui.moveTo(x=saga_sola,y=yukari_asagi - int(last[2]))
-                loraicontrol(self, status=False)
-
-                
-
                 if command == 'saat kaç':
                     saat = datetime.datetime.now().strftime('%H:%M')
                     lorai.speak(text=('saat' + str(saat)))
@@ -147,7 +115,7 @@ def on_quit():
 def guilorai():
     subprocess.Popen(r"C:\Users\{}\Desktop\lorai\loraisite.py".format(username),shell=True)
     webbrowser.open(url="http://localhost:7432/")
-image = Image.open("./static/media/infinity-symbol-clipart-download-best-infinity-14.png")
+image = Image.open("./static/media/lorai.png")
 menu = (
     item('LorAI', guilorai),
     item('Quit', on_quit)
