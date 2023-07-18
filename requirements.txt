@@ -16,3 +16,5 @@ pillow
 pyautogui
 pypresence
 selenium
+pymem
+yt-dlp

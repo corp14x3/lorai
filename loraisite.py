@@ -1,12 +1,13 @@
 from flask import Flask , request , render_template , redirect , url_for , flash
 
-import sqlite3 , random, os , datetime , requests as r
+import sqlite3 , random, os , subprocess, pymem , datetime , requests as r
 
 username = os.getlogin()
 con = sqlite3.connect("lorai.db", check_same_thread=False) 
+
 cursor = con.cursor()
 cursor.execute("CREATE TABLE IF NOT EXISTS programsc (pn TEXT, pw TEXT)")
-cursor.execute("CREATE TABLE IF NOT EXISTS drpc (header TEXT, details TEXT , pictureheader TEXT , picturelink TEXT , 1header TEXT , 1link TEXT , 2header TEXT , 2link TEXT)")
+cursor.execute("CREATE TABLE IF NOT EXISTS drpc (header TEXT, details TEXT , pictureheader TEXT , picturelink TEXT , header1 TEXT , link1 TEXT , header2 TEXT , link2 TEXT )")
 
 app = Flask(__name__,template_folder='./pages')
 app.debug = True
@@ -49,9 +50,40 @@ def loraiprogramd():
 
 @app.route("/discordrpc",methods=["GET","POST"])
 def lorairpc():
+    from lorairpc import LoraiDRPC
+    modulefd = LoraiDRPC()
     if request.method == "POST":
-        subprocess.Popen(r"C:\Users\{}\Desktop\lorai\lorairpc.py".format(username),shell=True)
-        return redirect('shortcuts-delete')
+        if "button" in request.form:
+            subprocess.Popen(r"C:\Users\{}\Desktop\lorai\lorairpc.py".format(username),shell=True)
+        # elif "button2" in request.form:
+        #     modulefd.presence(status=False)
+        else:
+            header = request.form.get("header")
+            details = request.form.get("details")
+            pictureheader = request.form.get("pictureheader")
+            picturelink = request.form.get("picturelink")
+            header1 = request.form.get("header1")
+            link1 = request.form.get("link1")
+            header2 = request.form.get("header2")
+            link2 = request.form.get("link2")
+            liste = con.execute("SELECT * FROM  drpc")
+            data = liste.fetchall()
+
+            if data == []:
+                cursor.execute("INSERT INTO drpc VALUES(?,?,?,?,?,?,?,?)",(header,details,pictureheader,picturelink,header1,link1,header2,link2))
+                con.commit()
+            else:
+                cursor.execute("UPDATE drpc SET header = ? ",[header])
+                cursor.execute("UPDATE drpc SET details = ? ",[details])
+                cursor.execute("UPDATE drpc SET pictureheader = ? ",[pictureheader])
+                cursor.execute("UPDATE drpc SET picturelink = ? ",[picturelink])
+                cursor.execute("UPDATE drpc SET header1 = ? ",[header1])
+                cursor.execute("UPDATE drpc SET link1 = ? ",[link1])
+                cursor.execute("UPDATE drpc SET header2 = ? ",[header2])
+                cursor.execute("UPDATE drpc SET link2 = ? ",[link2])
+                con.commit()
+        
+        return redirect('discordrpc')
     return render_template('loraidc.html')
 
 
