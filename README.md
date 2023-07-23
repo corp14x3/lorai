@@ -12,7 +12,9 @@ and start the Lorai with :
 ```sh
 python lorai.py
 ```
-> Note: Please dowload main folder to desktop. And if you use microsoft onedrive , please remove from your computer.
+or you can use lorai.bat
+
+> Note: Please dowload main folder to desktop, if you use microsoft onedrive , please remove from your computer. **And run as administrator**.
 
 
 
