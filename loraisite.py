@@ -1,6 +1,6 @@
 from flask import Flask , request , render_template , redirect , url_for , flash
 
-import sqlite3 , random, os , subprocess, pymem , datetime , requests as r
+import sqlite3 , random, os , subprocess, pymem , datetime , requests as r , yt_dlp as youtube_dl , time
 
 username = os.getlogin()
 con = sqlite3.connect("lorai.db", check_same_thread=False) 
@@ -86,7 +86,30 @@ def lorairpc():
         return redirect('discordrpc')
     return render_template('loraidc.html')
 
-
+@app.route("/yt-downloader",methods=["GET","POST"])
+def loraiyd():
+    if request.method == "POST":
+        if "download" in request.form:
+            try:
+                video_url = request.form.get("link")
+                video_info = youtube_dl.YoutubeDL().extract_info(url = video_url,download=False)
+                filename = f"{video_info['title']}.mp3"
+                options={
+                'format':'bestaudio/best',
+                'keepvideo':False,
+                'outtmpl': f"~/Desktop/lorai/downloads/{filename}",
+                }
+                with youtube_dl.YoutubeDL(options) as ydl:
+                    ydl.download([video_info['webpage_url']])
+                    flash(message="Download Complate!")
+                    time.sleep(2)
+                    return render_template('ytdownloader.html')
+            except:
+                flash(message="Something is wrong try again later!")
+                time.sleep(2)
+                return render_template('ytdownloader.html')
+        return redirect('yt-downloader')
+    return render_template('ytdownloader.html')
 
 if __name__ == '__main__':
     app.run(port=7432)

@@ -1,5 +1,8 @@
 {% extends './templatelorai.html' %}
 
 {% block body %}
-
+<form action="{{url_for('loraiyd')}}" method="post">
+    <input type="text" name="link" placeholder="paste link">
+    <button type="submit" name="download" class="btn btn-outline-success">Download</button>
+</form>
 {% endblock %}

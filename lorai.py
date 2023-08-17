@@ -11,6 +11,11 @@ username = os.getlogin()
 con = sqlite3.connect("lorai.db", check_same_thread=False)
 cursor = con.cursor()
 
+if os.name == "posix":
+    print("We will do some optimize for ur Linux / Android")
+if os.name == "nt":
+    print("We will do some optimize for ur Windows")
+
 class Lorai():
     def __init__(self):
         pass

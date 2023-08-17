@@ -1,22 +1,32 @@
+#modules
+import imaplib
+import email
 
-from tkinter import messagebox
-import os
-username = os.getlogin()
-command =  input()
-if command == 'temizle':
-    delete_folder = ["Temp","Prefetch"]
-    delete_folder2 = (r"C:\Users\{}\AppData\Local\Temp".format(username))
-    files = os.scandir(path=f"{delete_folder2}")
-    for file_ in files:
-        try:
-            os.remove(path=f"{delete_folder2}\{file_.name}")
-        except:
-            pass
-    for i in range(0,len(delete_folder)):
-        files = os.scandir(path=f"C:\Windows\{delete_folder[i]}")
-        for file_ in files:
-            try:
-                os.remove(path=f"C:\Windows\{delete_folder[i]}\{file_.name}")
-            except:
-                pass
-    messagebox.showinfo(title="Lorai Clearing System",message="Dosyalar Temizlendi")
+#credentials
+username ="manipulation.12347@gmail.com" #"tunah3412@gmail.com"
+
+#generated app password
+app_password="aqbrxtbinbkqiwku" #"jajdbrlgyzmeahqj"
+
+# https://www.systoolsgroup.com/imap/
+gmail_host= 'imap.gmail.com'
+
+
+#set connection
+mail = imaplib.IMAP4_SSL(gmail_host)
+
+#login
+mail.login(username, app_password)
+
+
+#select inbox
+mails = mail.select("INBOX")
+
+selected_mails = mail.search(None,"UNSEEN")
+for mm in selected_mails:
+    typ, data = mail.fetch(b"1", '(RFC822)')
+
+# Parse the email
+msg = email.message_from_bytes(data[0][1])
+print(msg['From'], ":", msg['Subject'])
+
