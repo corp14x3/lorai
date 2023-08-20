@@ -103,7 +103,12 @@ def on_quit():
     icon.visible = False
     icon.stop()
 def guilorai():
-    subprocess.Popen(r"C:\Users\{}\Desktop\lorai\loraisite.py".format(username),shell=True)
+    try:
+        subprocess.Popen(r"C:\Users\{}\Desktop\lorai\loraisite.py".format(username),shell=True)
+    except:
+        pass
+    finally:
+        subprocess.Popen(r"C:\Users\{}\Masaüstü\lorai\loraisite.py".format(username),shell=True)
     webbrowser.open(url="http://localhost:7432/")
 image = Image.open("./static/media/lorai.png")
 menu = (
