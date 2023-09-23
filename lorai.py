@@ -127,3 +127,6 @@ lorai_thread = threading.Thread(target=run_lorai)
 lorai_thread.start()
 
 icon.run()
+
+
+
