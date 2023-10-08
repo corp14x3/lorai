@@ -8,6 +8,7 @@ con = sqlite3.connect("lorai.db", check_same_thread=False)
 cursor = con.cursor()
 cursor.execute("CREATE TABLE IF NOT EXISTS programsc (pn TEXT, pw TEXT)")
 cursor.execute("CREATE TABLE IF NOT EXISTS drpc (header TEXT, details TEXT , pictureheader TEXT , picturelink TEXT , header1 TEXT , link1 TEXT , header2 TEXT , link2 TEXT )")
+cursor.execute("CREATE TABLE IF NOT EXISTS cmh (command TEXT, file TEXT)")
 
 app = Flask(__name__,template_folder='./pages')
 app.debug = True
@@ -110,6 +111,26 @@ def loraiyd():
                 return render_template('ytdownloader.html')
         return redirect('yt-downloader')
     return render_template('ytdownloader.html')
+
+@app.route("/command-handler",methods=["GET","POST"])
+def loraicmh():
+    liste = cursor.execute("SELECT * FROM cmh")
+    data = liste.fetchall()
+    if request.method == "POST":
+        command = request.form.get("command")
+        if "add" in request.form:
+            with open(file=f"commands/{command}.py",mode="x",encoding="utf-8") as f:
+                pass
+            with open(file="loraicommands.py",mode="+a",encoding="utf-8") as f:
+                f.writelines(f"\nfrom commands.{command} import *")
+            cursor.execute("INSERT INTO cmh VALUES(?,?)",(command,f".command/{command}.py"))
+            con.commit()
+        if "delete" in request.form:
+            cursor.execute("DELETE FROM cmh WHERE command = ?",[command])
+            os.remove(path=f"commands/{command}.py")
+            con.commit()
+        return redirect("command-handler")
+    return render_template("loraicmh.html",liste=data)
 
 if __name__ == '__main__':
     app.run(port=7432)

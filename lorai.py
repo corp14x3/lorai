@@ -6,7 +6,6 @@ from PIL import Image
 from pystray import MenuItem as item
 from tkinter import messagebox
 from selenium import webdriver
-
 username = os.getlogin()
 con = sqlite3.connect("lorai.db", check_same_thread=False)
 cursor = con.cursor()
@@ -41,9 +40,8 @@ class Lorai():
                 last = command.split(" ")
                 print(command,last)
 
-                if command == 'saat kaç':
-                    saat = datetime.datetime.now().strftime('%H:%M')
-                    lorai.speak(text=('saat' + str(saat)))
+                if command == 'example':
+                    pass
 
                 elif last[0] == "ara":
                     last.remove("ara")
@@ -93,8 +91,14 @@ class Lorai():
                                 pass
                     messagebox.showinfo(title="Lorai Clearing System",message="Dosyalar Temizlendi")
 
+
+                import loraicommands
+                loraicommands
+
+
             except:
                 print('Herhangibi bir ses yok.')
+            
            
 lorai=Lorai()
 
@@ -127,6 +131,3 @@ lorai_thread = threading.Thread(target=run_lorai)
 lorai_thread.start()
 
 icon.run()
-
-
-
