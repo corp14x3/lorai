@@ -1,1 +1,3 @@
-cd "C:\Users\%USERNAME%\Desktop\lorai" & pythonw lorai.py
+cd "C:\Users\%USERNAME%\Desktop\lorai" 
+
+.\env\Scripts\activate & pythonw lorai.py
