@@ -1,6 +1,6 @@
-# Is temporarily unavailable
-
 # Lor(A)I Self Asistant
+## Is temporarily unavailable
+
 ## Installation
 
 When you in the lorai folder , you just need to run :
