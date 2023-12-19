@@ -34,41 +34,37 @@ label1.pack()
 button = customtkinter.CTkButton(master=label1, text="add",fg_color="red",hover_color="gray", command="")
 button.pack()
 
-
-
 page2 = Frame(main)
-page3 = Frame(main)
-page4 = Frame(main)
-page5 = Frame(main)
-page6 = Frame(main)
-page7 = Frame(main)
-
-
-
-
 label2 = Label(page2, text="Sayfa 2")
 label2.pack()
 add_button_to_label(label2, "Düğme 2", lambda: print("Button 2 clicked"))
 
+page3 = Frame(main)
 label3 = Label(page3, text="Sayfa 3")
 label3.pack()
 add_button_to_label(label3, "Düğme 3", lambda: print("Button 3 clicked"))
 
+page4 = Frame(main)
 label4 = Label(page4, text="Sayfa 3")
 label4.pack()
 add_button_to_label(label4, "Düğme 3", lambda: print("Button 3 clicked"))
 
+page5 = Frame(main)
 label5 = Label(page5, text="Sayfa 3")
 label5.pack()
 add_button_to_label(label5, "Düğme 3", lambda: print("Button 3 clicked"))
 
+page6 = Frame(main)
 label6 = Label(page6, text="Sayfa 3")
 label6.pack()
 add_button_to_label(label6, "Düğme 3", lambda: print("Button 3 clicked"))
 
+page7 = Frame(main)
 label7 = Label(page7, text="Sayfa 3")
 label7.pack()
 add_button_to_label(label7, "Düğme 3", lambda: print("Button 3 clicked"))
+
+
 
 pages = {
     "page1": page1,

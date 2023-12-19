@@ -9,6 +9,7 @@ keyboard
 requests
 flask
 gtts
+customtkinter
 feedparser
 SpeechRecognition
 pystray

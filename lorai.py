@@ -10,6 +10,7 @@ import random, pymem , requests as r , yt_dlp as youtube_dl
 
 if os.name == "posix":
     print("We will do some optimize for ur Linux / Android")
+    
 if os.name == "nt":
     print("We will do some optimize for ur Windows")
 
