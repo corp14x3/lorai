@@ -1,18 +1,18 @@
+import os , webbrowser , datetime , sqlite3 , googletrans , subprocess , pystray , threading , pyautogui , keyboard , time , speech_recognition as sr , random, pymem , requests as r , yt_dlp as youtube_dl , sys
 from playsound import playsound
 from gtts import gTTS
-import os , webbrowser , datetime , sqlite3 , googletrans , subprocess , pystray , threading , pyautogui , keyboard , time
-import speech_recognition as sr
 from PIL import Image
 from pystray import MenuItem as item
 from tkinter import messagebox
 from selenium import webdriver
-import random, pymem , requests as r , yt_dlp as youtube_dl
+from pystray import MenuItem as item
 
-if os.name == "posix":
-    print("We will do some optimize for ur Linux / Android")
+username = os.getlogin()
+con = sqlite3.connect("lorai.db", check_same_thread=False) 
+cursor = con.cursor()
+cursor.execute("CREATE TABLE IF NOT EXISTS programsc (pn TEXT, pw TEXT)")
+cursor.execute("CREATE TABLE IF NOT EXISTS cmh (command TEXT, file TEXT)")
 
-if os.name == "nt":
-    print("We will do some optimize for ur Windows")
 
 class Lorai():
     def __init__(self):
@@ -101,19 +101,15 @@ class Lorai():
            
 lorai=Lorai()
 
-
 def on_quit():
+    exit
+    quit
     icon.visible = False
     icon.stop()
 
 image = Image.open("./static/media/lorai.png")
-menu = (
-    item('LorAI', "pass"),
-    item('Quit', on_quit)
-)
-
+menu = (item('LorAI', "pass"),item('Quit', on_quit))
 icon = pystray.Icon("Lor(A)I", image, "Lorai GUI", menu)
-
 
 def run_lorai():
     while True:
@@ -121,91 +117,57 @@ def run_lorai():
 
 lorai_thread = threading.Thread(target=run_lorai)
 lorai_thread.start()
-
 icon.run()
 
+liste = cursor.execute("SELECT * FROM cmh")
+data = liste.fetchall()
+command="commands"
 
+    
 
+def loraicmh():
+    if "add" == "addd":
+        with open(file=f"commands/{command}.py",mode="x",encoding="utf-8") as f:
+                f.close()
+        with open(file="loraicommands.py",mode="+a",encoding="utf-8") as f:
+            f.writelines(f"\nfrom commands.{command} import *")
+        cursor.execute("INSERT INTO cmh VALUES(?,?)",(command,f".command/{command}.py"))
+        con.commit()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    if "remove" == "removee":
+        cursor.execute("DELETE FROM cmh WHERE command = ?",[command])
+        os.remove(path=f"commands/{command}.py")
+        con.commit()
 
 def loraiprogram():
     liste = cursor.execute("SELECT * FROM programsc")
     data = liste.fetchall()
-    progn = request.form.get("programname")
-    progw = request.form.get("programway")
+    progn = "progn"
+    progw = "proggw"
     cursor.execute("INSERT INTO programsc VALUES(?,?)",(progn,progw))
     con.commit()
 
 def loraiprogramd():
     liste = cursor.execute("SELECT * FROM programsc")
     data = liste.fetchall()
-    progn = request.form.get("programname")
+    progn = "progn"
     cursor.execute("DELETE FROM programsc WHERE pn = ?",[progn])
     con.commit()
 
-
-def loraiyd():
-    try:
-        video_url = request.form.get("link")
-        video_info = youtube_dl.YoutubeDL().extract_info(url = video_url,download=False)
-        filename = f"{video_info['title']}.mp3"
-        options={
-        'format':'bestaudio/best',
-        'keepvideo':False,
-        'outtmpl': f"~/Desktop/lorai/downloads/{filename}",
-        }
-        with youtube_dl.YoutubeDL(options) as ydl:
-            ydl.download([video_info['webpage_url']])
-            time.sleep(2)
-    except:
-        time.sleep(2)
-
-def loraicmh():
-    liste = cursor.execute("SELECT * FROM cmh")
-    data = liste.fetchall()
-        command = "get command name from textbox"
-        with open(file=f"commands/{command}.py",mode="x",encoding="utf-8") as f:
-            pass
-        with open(file="loraicommands.py",mode="+a",encoding="utf-8") as f:
-            f.writelines(f"\nfrom commands.{command} import *")
-        cursor.execute("INSERT INTO cmh VALUES(?,?)",(command,f".command/{command}.py"))
-        con.commit()
-
-
-
 def loraicset():
-            os.system("powercfg /DUPLICATESCHEME e9a42b02-d5df-448d-aa00-03f14749eb61")
-            flash("Nihai performans olusturuldu.")
-            try:
-                os.system('netsh interface ipv4 set dns "Wi-Fi" static 1.1.1.1 primary')#netsh interface ip add dns name="Wi-Fi" addr=8.8.8.8  netsh interface ip add dns name="Wi-Fi" addr=8.8.4.4 index=2
-                os.system('netsh interface ipv4 add dns "Wi-Fi" 1.0.0.1 index=2')
-                os.system('netsh interface ipv6 set dns "Wi-Fi" static 2606:4700:4700::1111 primary')
-                os.system('netsh interface ipv6 add dns "Wi-Fi" 2606:4700:4700::1001 index=2')
-            except:
-                pass
-            try:
-                os.system('netsh interface ipv4 set dns "Ethernet" static 1.1.1.1 primary')
-                os.system('netsh interface ipv4 set dns "Ethernet" static 1.0.0.1 index=2')
-                os.system('netsh interface ipv6 set dns "Ethernet" static 2606:4700:4700::1111 primary')
-                os.system('netsh interface ipv6 set dns "Ethernet" static 2606:4700:4700::1001 index=2')
-            except:
-                pass
+    os.system("powercfg /DUPLICATESCHEME e9a42b02-d5df-448d-aa00-03f14749eb61")
+    print("aa")
+    try:
+        os.system('netsh interface ipv4 set dns "Wi-Fi" static 1.1.1.1 primary')#netsh interface ip add dns name="Wi-Fi" addr=8.8.8.8  netsh interface ip add dns name="Wi-Fi" addr=8.8.4.4 index=2
+        os.system('netsh interface ipv4 add dns "Wi-Fi" 1.0.0.1 index=2')
+        os.system('netsh interface ipv6 set dns "Wi-Fi" static 2606:4700:4700::1111 primary')
+        os.system('netsh interface ipv6 add dns "Wi-Fi" 2606:4700:4700::1001 index=2')
+    except:
+        pass
+    try:
+        os.system('netsh interface ipv4 set dns "Ethernet" static 1.1.1.1 primary')
+        os.system('netsh interface ipv4 set dns "Ethernet" static 1.0.0.1 index=2')
+        os.system('netsh interface ipv6 set dns "Ethernet" static 2606:4700:4700::1111 primary')
+        os.system('netsh interface ipv6 set dns "Ethernet" static 2606:4700:4700::1001 index=2')
+    except:
+        pass
