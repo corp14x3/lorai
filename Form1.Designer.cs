@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             downloader_page = new Panel();
             give_me_a_link = new Label();
             linkBox = new TextBox();
@@ -60,7 +59,6 @@
             // downloader_page
             // 
             downloader_page.BackColor = Color.Black;
-            downloader_page.BackgroundImage = (Image)resources.GetObject("downloader_page.BackgroundImage");
             downloader_page.BackgroundImageLayout = ImageLayout.Stretch;
             downloader_page.Controls.Add(give_me_a_link);
             downloader_page.Controls.Add(linkBox);
